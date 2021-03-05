@@ -7,7 +7,7 @@ var player_object = "";
 var block_object = "";
 
 function draw_player() {
-  fabric.Image.fromURL("player.png", function (Img) {
+  fabric.Image.fromURL("images.jpg", function (Img) {
     player_object = Img;
     player_object.scaleToWidth(150);
     player_object.scaleToHeight(150);
@@ -18,4 +18,83 @@ function draw_player() {
     canvas.add(player_object);
   });
 }
-function draw_object() {}
+function draw_object(imagename) {
+  fabric.Image.fromURL(imagename, function (Img) {
+    block_object = Img;
+    block_object.scaleToWidth(block_width);
+    block_object.scaleToHeight(block_height);
+    block_object.set({
+      top: position_y_player,
+      left: position_x_player,
+    });
+    canvas.add(block_object);
+  });
+}
+window.addEventListener("keydown", my_keypress);
+function my_keypress(e) {
+  console.log(e.keyCode);
+  if (e.keyCode == 37) {
+    left();
+  }
+  if (e.keyCode == 38) {
+    up();
+  }
+  if (e.keyCode == 39) {
+right();
+  }
+  if (e.keyCode == 40) {
+    down();
+  }
+  if (e.keyCode == 82) {
+    console.log("roof");
+    draw_object("roof.jpg");
+  }
+  if (e.keyCode == 89) {
+    console.log("yellow");
+    draw_object("yellow_wall.png");
+  }
+  if (e.keyCode == 68) {
+    console.log("darkgreen");
+    draw_object("dark_green.png");
+  }
+  if (e.keyCode == 85) {
+    console.log("u");
+    draw_object("unique.png");
+  }
+  if (e.keyCode == 67) {
+    console.log("c");
+    draw_object("cloud.jpg");
+  }
+  if (e.keyCode == 76) {
+    console.log("l");
+    draw_object("light_green.png");
+  }
+  if (e.keyCode == 71) {
+    console.log("g");
+    draw_object("ground.png");
+  }
+  if (e.keyCode == 84) {
+    console.log("t");
+    draw_object("trunk.jpg");
+  }
+}
+function up(){
+  position_y_player=position_y_player-block_height;
+  canvas.remove(player_object);
+  draw_player();
+}
+function down(){
+  position_y_player=position_y_player+block_height;
+  canvas.remove(player_object);
+  draw_player();
+}
+function left(){
+  position_x_player=position_x_player-block_width;
+  canvas.remove(player_object);
+  draw_player();
+}
+function right(){
+  position_x_player=position_x_player+block_width;
+ canvas.remove(player_object);
+ draw_player();
+}
