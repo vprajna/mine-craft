@@ -32,7 +32,7 @@ function draw_object(imagename) {
 }
 window.addEventListener("keydown", my_keypress);
 function my_keypress(e) {
-  console.log(e.keyCode);
+  console.log(e);
   if (e.keyCode == 37) {
     left();
   }
@@ -77,24 +77,54 @@ right();
     console.log("t");
     draw_object("trunk.jpg");
   }
+  if (e.keyCode == 87) {
+    console.log("w");
+    draw_object("wall.jpg");
+  }
+ if (e.keyCode==80 && e.shiftKey==true) {
+   console.log("p");
+   block_width=block_width+10;
+   console.log(block_width);
+   block_height=block_height+10;
+   console.log(block_height);
+   document.getElementById("height").innerHTML=block_height;
+   document.getElementById("width").innerHTML=block_width;
+ }
+ if (e.keyCode==77 && e.shiftKey==true) {
+   console.log("m");
+   block_width=block_width-10;
+   console.log(block_width);
+   block_height=block_height-10;
+   console.log(block_height);
+   document.getElementById("height").innerHTML=block_height;
+   document.getElementById("width").innerHTML=block_width;
+ }
 }
 function up(){
-  position_y_player=position_y_player-block_height;
+  if (position_y_player>0) {
+    position_y_player=position_y_player-block_height;
   canvas.remove(player_object);
   draw_player();
+  }
 }
 function down(){
-  position_y_player=position_y_player+block_height;
-  canvas.remove(player_object);
-  draw_player();
+  if (position_y_player<450) {
+    position_y_player=position_y_player+block_height;
+    canvas.remove(player_object);
+    draw_player();
+  }
 }
 function left(){
-  position_x_player=position_x_player-block_width;
+  if (position_x_player>0) {
+    position_x_player=position_x_player-block_width;
   canvas.remove(player_object);
   draw_player();
+  }
 }
 function right(){
-  position_x_player=position_x_player+block_width;
+  if (position_x_player<850) {
+    position_x_player=position_x_player+block_width;
  canvas.remove(player_object);
  draw_player();
+  }
 }
